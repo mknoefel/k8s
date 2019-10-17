@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myUbuntu
+  labels:
+    owner: Markus
+
+spec:
+  containers:
+    - name: ubuntu
+      image: ubuntu:latest
