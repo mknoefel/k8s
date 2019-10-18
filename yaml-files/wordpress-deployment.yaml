@@ -13,12 +13,29 @@ spec:
   type: LoadBalancer
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume1
+  labels:
+    type: local
+    app: wordpress
+spec:
+  storageClassName: press
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/word"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: wp-pv-claim
   labels:
     app: wordpress
 spec:
+  storageClassName: press
   accessModes:
     - ReadWriteOnce
   resources:

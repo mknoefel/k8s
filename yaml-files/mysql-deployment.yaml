@@ -1,3 +1,5 @@
+# you need to provide a secret with the following command:
+# kubectl create secret generic mysql-pass --from-literal=password=<your password>
 apiVersion: v1
 kind: Service
 metadata:
@@ -13,12 +15,30 @@ spec:
   clusterIP: None
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+    app: wordpress
+spec:
+  storageClassName: wordpress
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
   labels:
     app: wordpress
 spec:
+  storageClassName: wordpress
   accessModes:
     - ReadWriteOnce
   resources:
