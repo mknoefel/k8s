@@ -10,3 +10,5 @@ spec:
     - name: ubuntu
       image: ubuntu:latest
       command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"] 
+
+  restartPolicy: Never
